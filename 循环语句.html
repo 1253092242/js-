@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+//		for(var x in window){
+//			console.log(x);//好多东西
+//		}
+		var num=0;
+		for(var i=0;i<10;i++){
+			for(var j=0;j<10;j++){
+				if(i==5&&j==5){
+					break;
+				}
+				num++;
+			}
+		}
+		console.log(num);//95   也就是说  break只会跳出他所在最内层的循环  在循环嵌套的情况下并不能跳出整个大循环
+		//但是 可以通过添加标签的方法    让break指定结束标签循环 ：如下
+		
+		var num=0;
+		xxx:for(var i=0;i<10;i++){
+				for(var j=0;j<10;j++){
+					if(i==5&&j==5){
+						break xxx;
+					}
+					num++;
+				}
+			}
+		console.log(num);//55
+		
+		
+		
+	</script>
+</html>

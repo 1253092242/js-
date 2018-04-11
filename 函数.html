@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		function xx(){
+			if(arguments[1]){
+				console.log("起码两个参数")
+			}
+			else{
+				console.log(0)
+			}
+		}
+		xx(1,1)//输出起码两个参数
+		xx(2)//0
+		xx(0)//0
+		
+//		******这点很重要,代表在函数创建时不需要规定参数数量******
+
+function setname(obj){
+	obj.name="xxx";
+	obj=new Object();
+	obj.name="yyy";
+	console.log(obj.name);//YYY
+}
+var ss=new Object();
+setname(ss);
+console.log(ss.name);//XXX
+//*****函数中创建的对象会在结束后销毁   而参数依然指向原目标 即ss*****
+var num1=1;
+function a(){
+	if(num1<3){
+		num1++;
+		a();
+	}
+	else{
+		alert(num1)
+		b();
+	}
+}
+function b(){
+	console.log(b.caller);
+}
+//a();//3
+
+
+
+
+//关于apply（）和call（）
+function c(x,y){
+	return x+y;
+}
+function d(x,y){
+	return c.apply(this,arguments);
+}
+console.log(d(1,2));//如果不用apply方法   直接传arguments会返回understand  但是传x和y是可以返回3  所以初步理解该方法在这种情况下应该是适合未知参数 
+
+
+  window.number = 'one';
+        document.number = 'two';
+
+        var s1 = {number: 'three' };
+        function changeColor(){
+            console.log(this.number);
+        }
+
+        changeColor.apply();         //one (默认传参)
+        changeColor.apply(window);   //one
+        changeColor.apply(document); //two
+        changeColor.apply(this);     //one
+        changeColor.apply(s1);       //three
+//综上所述  apply方法主要用于传递作用域.
+
+</script>
+</html>

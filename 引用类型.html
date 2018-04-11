@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+	 var 	a=[1,2,4],b=[0,1],c=0;
+	 function text(a1,b1,c1){
+	 	a1=[];
+	 	b1[0]=1;
+	 	c1=2;
+	 	console.log(c)
+	 }
+	 text(a,b,c);
+	 console.log(a,b,c)
+	 
+	 
+	 //变量类型分为基本类型和引用类型，在往函数传参的时候    基本变量是把值赋值近函数，而引用类型则是复制链接给新变量，如上面
+//	 a的地址指向内存里的[1,2,4],在往text()传入a的时候   复制了这个地址给了a1
+//	 
+//	 于是 a1也是一个指向[1,2,4]的引用,虽然a和a1是指向相同的地方  但却是两个变量.
+//	 函数中:a1=[] 只是创建了一个空数组  然后将a1的地址变为指向该空数组
+//	 a的属性仍然不变
+	</script>
+</html>

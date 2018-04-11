@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+//		array.pop()移除数组最后面一项,并返回其值
+//		array.shift()移除数组最前面一项,并返回其值
+//		array.unshift("xx")向数组前面入(添加)一个参数  并返回现在数组的长度
+//		array.push("xx")向数组最后推入(添加)一个参数  并返回现在数组的长度
+//		array.reverse()把数组的顺序反过来
+//		array.sort()把数组的顺序按照其中参数的大小按升序排列  但是只试用太小   所以function一个函数   放入()中  如
+		var arr=[1,22,3,98,5]
+		function compare(x,y){
+			var xx=x>y;
+			switch(xx){
+				case false:
+					return -1;//如果第一个数小于第二个   就返回负数
+					break;
+				case true:
+					return 1;//和上面相反
+					break;
+			}
+			//上面return的值 是让数组按照升序排列 反着来就可以按照降序排列
+		}
+		arr.sort(compare);
+		console.log(arr)//[1,3,5,22,98]
+		
+		
+//	array.concat()如果括号内是一个数组  则创建该数组副本,如果是多个则把所有数组的每一项复制一遍  成为一个新数组     数组以外的参数则按照顺序组成一个数组
+	
+	var arr1=[1,2]
+	var arr2=[3,4]
+	console.log(arr1.concat(arr2))//[1,2,3,4]
+	console.log(arr1.concat(5,arr2))//[1,2,5,3,4]
+	
+	
+	
+	arr.slice(x,y)//把从x到y位置的项拿出来  重新组成一个数组;如果包含负数 则用该数加上数组长度的结果
+	arr.splice(x,y)//从x开始删除y个项目;
+	arr.splice(x,0,z)//从x开始插入项目  z可以是[1,2]
+	arr.splice(x,1,z)//把x替换为z
+	//	以上会返回被删除的项的值
+	arr.indexOf(x)//从最前面开始返回x在arr中的第一次出现的位置   如果没有则返回-1
+	arr.lastindexOf(x)//同上，不过从后面开始
+	
+	
+	arr.every():运行给定函数,当数组中每一项都返回true 则返回true;
+	arr.some();有一项返回true就返回true;
+	arr.filter();返回运行函数返回true的项组成的数组;
+	arr.forEach();只是运行函数,没有返回
+	arr.map();返回每一项的结果组成的数组
+	
+	var  number=[1,2,3,4,5,6];
+	console.log(number.map(function(value){
+		return value>2;
+	}))//[f,f,t,t,t,t]
+	注意:上面的迭代方法function全部都是有固定三个参数-value(数组每一项的值),index(每一项的坐标),当前数组;
+	
+	
+	arr.reduce(function(prev,cur,index,array){});从头对每一项归并,可以求所有项的和之类,感觉用处不大,并且IE9+
+	arr.reduceRight(.....);从后往前执行函数,其他一样;
+	
+	
+	</script>
+</html>

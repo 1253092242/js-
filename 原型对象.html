@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function Person(){};
+			Person.prototype={
+				constructor:Person,
+				name:"11",
+				age:"111",
+				fuck:["1","2","3"],
+				sayName:function(){
+					console.log(this.name);
+				}
+			}
+			var frirend1=new Person();
+			var frirend2=new Person();
+			frirend1.fuck.push("4");
+			console.log(Object.getOwnPropertyNames(Person.prototype))
+			console.log(frirend1.fuck)//1234
+			console.log(frirend2.fuck)//1234,也就说直接修改了原型对象的值（这个是不是可以用来实现数据绑定），在不需要这个功能的时候不太好
+		</script>
+	</body>
+</html>

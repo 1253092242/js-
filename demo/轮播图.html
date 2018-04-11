@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+ 2 <html lang="en">
+ 3 <head>
+ 4     <meta charset="UTF-8">
+ 5     <title>Document</title>
+ 6     <link rel="stylesheet" href="index.css">
+ 7     <script src="tools.js"></script>
+ 8     <script src="js.js"></script>
+		 <style type="text/css">
+		 	 1 ul,ol,li{padding:0;margin:0;list-style: none;}
+		 2 .container{
+		 3     width: 500px;
+		 4     height: 300px;
+		 5     margin:50px auto;
+		 6     position: relative;
+		 7 }
+		 8 #msg{
+		 9     width:100%;
+		10     height:40px;
+		11     line-height: 40px;
+		12     text-indent:10px;
+		13     position:absolute;
+		14     bottom:0px;
+		15     left:0;
+		16     color:white;
+		17     font-size: 16px;
+		18     background:rgba(0,0,0,.8);
+		19     cursor:pointer;
+		20     z-index:1;
+		21 }
+		22 ul li a{display: block;}
+		23 img{width: 500px;height: 300px;}
+		24 ol{position: absolute;bottom:10px; left:50%; -webkit-transform:translateX(-50%); background:rgba(255,255,255,.6);border-radius:7px;padding:3px;z-index:2;}
+		25 ol li{background: red; float:left; width:8px; height:8px;margin-left:5px; -webkit-border-radius:4px;-mz-border-radius:4px;margin-right: 7px}
+		26 span{
+		27     width:30px;
+		28     height:45px;
+		29     line-height: 45px;
+		30     font-size:40px;
+		31     color:white;
+		32     background:rgba(255,255,255,.3);
+		33     cursor:pointer;
+		34     position:absolute;
+		35     font-weight: bold;
+		36     top:50%;
+		37     left:0;
+		38     -webkit-transform:translateY(-50%);
+		39     -mz-transform:translateY(-50%);
+		40     -webkit-transition:all 1s ease 0s;
+		41 }
+		42 #rtBtn{
+		43      right:0;
+		44      left:auto;
+		45 }
+		46 span:hover{
+		47     -webkit-transform:rotateY(40deg) translateX(-30px) scale(1.2);
+		48 }
+		 </style>
+ 9 </head>
+10 <body>
+11     <div class="container" id="slide1">
+12         <ul>
+13             <li><a href=""><img src="../img/1.jpg" alt="文字1"></a></li>
+14             <li><a href=""><img src="../img/2.jpg" alt="文字2"></a></li>
+15             <li><a href=""><img src="../img/3.jpg" alt="文字3"></a></li>
+17         </ul>
+18     </div>
+19     <script>
+20         var s = new Slider("slide1");
+21         console.info(s);
+
+
+			 1 function Slider(containerId){
+			 2     this.containerId = $(containerId);//容器
+			 3     this.ullis =$get($get(containerId,"ul")[0],"li");
+			 4     this.num = this.ullis.length;
+			 5     this.ollis =this.createList();
+			 6     this.indexA = 1;
+			 7     this.timer;
+			 8     this.init(this.indexA);
+			 9     this.ltBtn = $("ltBtn");
+			10     this.rtBtn = $("rtBtn");
+			11     this.mouseenter();
+			12     this.autoplay(this.indexA);
+			13     console.info(this.ollis);
+			14 }
+			15 Slider.prototype.createList =function(){//创建ol
+			16     var ol = $create("ol");
+			17     var lis = [];
+			18     for(var i = 0; i<this.num;i++){
+			19         var li = $create("li");
+			20         ol.appendChild(li);
+			21         lis.push(li);    
+			22     }
+			23     this.containerId.appendChild(ol);
+			24     var spanleft = $create("span")
+			25     spanleft.innerHTML="&lt;"
+			26     spanleft.id="ltBtn";
+			27     this.containerId.appendChild(spanleft);
+			28     var spanright =$create("span");
+			29     spanright.innerHTML = "&gt;"
+			30     spanright.id = "rtBtn";
+			31     this.containerId.appendChild(spanright);
+			32     var div = $create("div")
+			33     div.id= "msg";
+			34     this.containerId.appendChild(div);
+			35     return lis;
+			36 }
+			37 Slider.prototype.init =function(index){
+			38     this.moveto(index);
+			39 }
+			40 Slider.prototype.mouseenter =function(){
+			41     var that = this;
+			42     for (var i = 0; i < this.num; i++) {
+			43         this.ollis[i].index = i; 
+			44         this.ollis[i].onmouseenter = function(){
+			45             that.moveto(this.index);
+			46         }
+			47     }
+			48     this.ltBtn.onclick = function(){
+			49         if(that.indexA>0){
+			50             that.indexA--;
+			51             that.moveto(that.indexA);
+			52         }else{
+			53             that.indexA=that.num-1;
+			54             that.moveto(that.indexA);
+			55         }
+			56     }
+			57     this.rtBtn.onclick = function(){
+			58         if(that.indexA<that.num-1){
+			59             that.indexA++;
+			60             that.moveto(that.indexA);
+			61         }else{
+			62             that.indexA = 0;
+			63             that.moveto(that.indexA);
+			64         }
+			65     }
+			66 }
+			67 Slider.prototype.moveto =function(index){
+			68     for (var i = 0; i < this.num; i++) {
+			69         this.ullis[i].style.display="none";
+			70         this.ollis[i].style.backgroundColor="red";    
+			71     }
+			72     this.ullis[index].style.display="block";
+			73     this.ollis[index].style.backgroundColor="blue";
+			74     $("msg").innerHTML = this.ullis[index].firstChild.firstChild.alt;
+			75 }
+			76 Slider.prototype.autoplay= function(indexA){
+			77     var that =this;
+			78     
+			79     that.timer = setInterval(function(){
+			80             indexA%=that.num;
+			81             that.moveto(indexA);    
+			82             indexA++;
+			83         },3000);
+			84     that.containerId.onmouseenter =function(){
+			85         clearInterval(that.timer);
+			86         console.info(that.containerId);
+			87     }
+			88     that.containerId.onmouseleave = function(){
+			89         that.autoplay(indexA)
+			90     }    
+			91     
+			92 }
+22     </script>
+23 </body>
+24 </html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			function SuperType(){
+				this.prototype=true;
+			}
+			SuperType.prototype.getSupervalue=function(){
+				return this.prototype;
+			}
+			function SubType(){
+				this.subprotptype=false;
+			}
+			SubType.prototype=new SuperType();
+			
+			SubType.prototype.getsubvalue=function(){
+				return this.subprotptype;
+			}
+			var instance=new SubType();
+			console.log(instance.getSupervalue());//true
+			
+			
+			
+			
+			function a(){
+				this.colors=["1","2","3"]
+			}
+			function b(){
+				a.call(this)
+			}
+			var c=new b();
+			c.colors.push("4");
+			console.log(c.colors);//1234
+			 
+			 var d=new b();
+			 console.log(d.colors);//123
+			 //因为实例修改引用类型对象属性的时候会一起更改原型的内容，所以可以用call借用构造函数。
+			 
+			 
+		</script>
+	</body>
+</html>
