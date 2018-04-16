@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>变量</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    'use strict';
+
+    function fn1() {
+        console.log(a);//报错,未定义
+        let a=1;
+        let a=2;//报错，不能重复定义，并且报错会在14行之前。
+        console.log(a);
+        // 用let 定义变量  不会有声明。不太懂有什么区别
+    }
+    function fn2() {
+        let b=1;
+        // let b=2;//报错，不能重复定义
+        function b(){alert(1)};//报错，不能重复定义
+    }
+
+    // 重点1：let和function类似，js文件被解析时，会先读取let。结论：let是声明，但是不和var一样  反而像function。
+    // 纠错：let除了会在读取js文件时先提出来查看错误，但是执行顺序和var 一样。也就是先使用再声明依然会报错。
+
+    //let
+</script>
+</html>
