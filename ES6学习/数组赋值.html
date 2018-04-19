@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    "use strict";
+    // let [a,b,c]=[1,2,3]
+    // console.log(a,b,c);//123
+
+    // let arr=["2","3"]
+    // let [a,b,c]=arr;
+    // console.log(a,b,c)//2,3,undefined
+
+
+    // // 省略赋值
+    // let arr1=[0,1,2,3,4];
+    // let[x,,,y]=arr1;
+    // console.log(x, y);//0,3
+    //
+    //
+    //
+    // //不定参数赋值
+    // let arr2=[0,1,2,3,4]
+    // let [a,...b]=arr2;
+    // console.log(a, b);//0,[1,2,3,4]
+
+
+    let [b=1]=[undefined];
+    console.log(b);//1
+
+    const [d=1]=[5];
+    console.log(d);//5
+
+    const [d=1]=[5]=[4];//报错。不能赋值
+    //所以说默认赋值法，应该是先看等号右边，在右边为undefined时才会吧默认值赋给d，不然就把数组元素赋值给d；在 [d=1]=[5]中应该只赋值了一次；
+</script>
+</html>

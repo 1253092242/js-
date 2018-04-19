@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #slider{
+            padding: 10px;
+            width: 600px;
+            height: 400px;
+            position: relative;
+            margin: 0 auto;
+            background-color: black;
+            opacity: 0.8;
+        }
+        #slider .imgshow{
+            width: 540px;
+            height: 380px;
+            margin: 10px 30px;
+        }
+        #slider .imgshow img{
+            width: 100%;
+            height: 100%;
+        }
+        #slider .imglist{
+            position: absolute;
+            bottom: 40px;
+            right: 60px;
+        }
+        #slider .imglist img{
+            z-index: 10000;
+            width: 15px;
+            margin-right: 3px;
+            cursor:pointer;
+        }
+        #slider .imgletf{
+            position: absolute;
+            left: 10px;
+            top: 160px;
+            cursor:pointer;
+        }
+        #slider .imgright{
+            position: absolute;
+            right: 10px;
+            top: 160px;
+            cursor:pointer;
+        }
+        .imgright img{
+            height: 40px;
+        }
+        .imgletf img{
+            height: 40px;
+        }
+        .imglist .active{
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="slider">
+
+</div>
+</body>
+<script type="text/javascript">
+    slider({
+        objID:"slider",
+        imgs:["img/1.jpg","img/2.jpg","img/3.jpg"],
+    });
+    function  slider(data) {
+        let _slider=document.getElementById(data.objID);
+        let imgs=data.imgs;
+        let imgrum=imgs.length;
+        if (imgs.length>1){
+            let html='' +
+                '<div class="imgshow">'+
+                    '<img src='+imgs[0]+' alt="" >'+
+                '</div>'+
+                '<div class="imglist">'+
+                    '<img class="active" src="img/icon-wtpt-ac.png" index="0">'+
+                '</div>'+
+                '<div class="imgletf">'+
+                    '<img src="img/icon-left.png" alt="">'+
+                '</div>'+
+                '<div class="imgright">'+
+                    '<img src="img/icon-right.png" alt="">'+
+                '</div>';
+            _slider.innerHTML=html;
+            let imglist=_slider.getElementsByClassName('imglist')[0];//右下角图标列表
+            let lmg_show=_slider.getElementsByClassName('imgshow')[0];//展示的图片
+            let imgleft=_slider.getElementsByClassName('imgletf')[0];//向左翻页
+            let imgright=_slider.getElementsByClassName('imgright')[0];//向右翻页
+            for(let i=1;i<imgrum;i++){//根据图片添加右下角图标
+                let img=document.createElement('img');
+                img.setAttribute("src","img/icon-wtpt.png");
+                img.setAttribute("index",i);
+                imglist.appendChild(img);
+            }
+            imgleft.onclick=function () {//向左翻页
+                if(index==0){
+                    index=imgrum-1;
+                }
+                else{
+                    index--;
+                }
+                lmg_show.getElementsByTagName("img")[0].setAttribute("src",imgs[index]);
+            }
+            imgright.onclick=function () {//向右翻页
+                if(index==imgrum-1){
+                    index=0;
+                }
+                else{
+                    index++;
+                }
+                lmg_show.getElementsByTagName("img")[0].setAttribute("src",imgs[index]);
+            }
+            imglist.onclick=function () {//点击右下角图标切换图片
+                console.log(event.path[0]);
+                if(event.path[0].tagName=="IMG"){
+                    let e=event.path[0];
+                    index=e.getAttribute("index");
+                }
+            }
+        }
+        let _img=imgs;
+        let index=0;
+    }
+    slider.prototype.define
+</script>
+</html>
