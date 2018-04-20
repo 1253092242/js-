@@ -24,14 +24,15 @@
         }
         #slider .imglist{
             position: absolute;
-            bottom: 40px;
+            bottom: 30px;
+            height: 30px;
             right: 60px;
         }
         #slider .imglist img{
-            z-index: 10000;
-            width: 15px;
-            margin-right: 3px;
+            margin: 0px 10px;
             cursor:pointer;
+            width: 15px;
+
         }
         #slider .imgletf{
             position: absolute;
@@ -52,7 +53,8 @@
             height: 40px;
         }
         .imglist .active{
-            margin-bottom: 5px;
+            position: relative;
+            height: 30px;
         }
     </style>
 </head>
@@ -62,68 +64,93 @@
 </div>
 </body>
 <script type="text/javascript">
-    slider({
+    var slider=function(data){
+        this._slider=document.getElementById(data.objID);
+        this.imgs=data.imgs;//图片列表
+        this.imgrum=this.imgs.length;//图片
+        createdom=function (){
+            if (this.imgs.length>1){
+                let html='' +
+                    '<div class="imgshow">'+
+                    '<img src='+this.imgs[0]+' alt="" >'+
+                    '</div>'+
+                    '<div class="imglist">'+
+                    '<img class="active" src="img/icon-wtpt.png" index="0">'+
+                    '</div>'+
+                    '<div class="imgletf">'+
+                    '<img src="img/icon-left.png" alt="">'+
+                    '</div>'+
+                    '<div class="imgright">'+
+                    '<img src="img/icon-right.png" alt="">'+
+                    '</div>';
+                this._slider.innerHTML=html;
+
+            }
+        },
+        createdom.call(this);//添加dom结构
+        this.imglist=this._slider.getElementsByClassName('imglist')[0];//右下角图标列表
+        this.lmg_show=this._slider.getElementsByClassName('imgshow')[0];//展示的图片
+        this.imgleft=this._slider.getElementsByClassName('imgletf')[0];//向左翻页
+        this.imgright=this._slider.getElementsByClassName('imgright')[0];//
+        let that=this;//that指向slider
+        this.index=0;
+        Object.defineProperty(this,"_index",{
+            get:function (rum) {
+                return this.index;
+            },
+            set:function (rum) {
+                this.index=parseInt(rum);
+                this.lmg_show.getElementsByTagName("img")[0].setAttribute("src",this.imgs[this.index]);
+                Array.prototype.forEach.call(that.imglist.getElementsByTagName("img"), function(e) {
+                    e.className="";
+                });
+                // for(let i=0;i<that.imgrum;i++){
+                //     that.imglist.getElementsByTagName("img")[i].className="";
+                // }
+                that.imglist.getElementsByTagName("img")[that.index].className="active";
+            },
+        });
+        for(let i=1;i<this.imgrum;i++){//根据图片添加右下角图标
+            let img=document.createElement('img');
+            img.setAttribute("src","img/icon-wtpt.png");
+            img.setAttribute("index",i);
+            this.imglist.appendChild(img);
+        };
+        this.imgleft.onclick=function () {//向左翻页
+            if(that.index==0){
+                that._index=that.imgrum-1;
+            }
+            else{
+                that._index=that.index-1;
+            }
+
+        },
+        this.imgright.onclick=function () {//向右翻页
+            if(that.index==that.imgrum-1){
+                that._index=0;
+            }
+            else{
+                that._index=that.index+1;
+            }
+        },
+        this.imglist.onclick=function () {//点击右下角图标切换图片
+            if(event.path[0].tagName=="IMG"){
+                let e=event.path[0];
+                that._index=e.getAttribute("index");
+
+            }
+        },
+        this._timer=setInterval(this.imgright.onclick,2000);
+        this._slider.onmouseover=function () {
+            clearInterval(that._timer);
+        }
+        this._slider.onmouseout=function () {
+            that._timer=setInterval(that.imgright.onclick,2000);
+        }
+    }
+    var xx=new slider({
         objID:"slider",
         imgs:["img/1.jpg","img/2.jpg","img/3.jpg"],
     });
-    function  slider(data) {
-        let _slider=document.getElementById(data.objID);
-        let imgs=data.imgs;
-        let imgrum=imgs.length;
-        if (imgs.length>1){
-            let html='' +
-                '<div class="imgshow">'+
-                    '<img src='+imgs[0]+' alt="" >'+
-                '</div>'+
-                '<div class="imglist">'+
-                    '<img class="active" src="img/icon-wtpt-ac.png" index="0">'+
-                '</div>'+
-                '<div class="imgletf">'+
-                    '<img src="img/icon-left.png" alt="">'+
-                '</div>'+
-                '<div class="imgright">'+
-                    '<img src="img/icon-right.png" alt="">'+
-                '</div>';
-            _slider.innerHTML=html;
-            let imglist=_slider.getElementsByClassName('imglist')[0];//右下角图标列表
-            let lmg_show=_slider.getElementsByClassName('imgshow')[0];//展示的图片
-            let imgleft=_slider.getElementsByClassName('imgletf')[0];//向左翻页
-            let imgright=_slider.getElementsByClassName('imgright')[0];//向右翻页
-            for(let i=1;i<imgrum;i++){//根据图片添加右下角图标
-                let img=document.createElement('img');
-                img.setAttribute("src","img/icon-wtpt.png");
-                img.setAttribute("index",i);
-                imglist.appendChild(img);
-            }
-            imgleft.onclick=function () {//向左翻页
-                if(index==0){
-                    index=imgrum-1;
-                }
-                else{
-                    index--;
-                }
-                lmg_show.getElementsByTagName("img")[0].setAttribute("src",imgs[index]);
-            }
-            imgright.onclick=function () {//向右翻页
-                if(index==imgrum-1){
-                    index=0;
-                }
-                else{
-                    index++;
-                }
-                lmg_show.getElementsByTagName("img")[0].setAttribute("src",imgs[index]);
-            }
-            imglist.onclick=function () {//点击右下角图标切换图片
-                console.log(event.path[0]);
-                if(event.path[0].tagName=="IMG"){
-                    let e=event.path[0];
-                    index=e.getAttribute("index");
-                }
-            }
-        }
-        let _img=imgs;
-        let index=0;
-    }
-    slider.prototype.define
 </script>
 </html>

@@ -5,22 +5,28 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style type="text/css">
-  	.button{
-  		height: 10px;
-  		width: 10px;
-  		background:url(img/bm1.png);
-  	}
-  	.styleclass{
-  		background:url(img/close.png);
-  	}
+  	
   </style>
 </head>
 <body>
    	<button class="button" onclick="click1(this)"></button>
     <script type="text/javascript">
-    	function click1(e){
-    			e.setAttribute("class","styleclass"); 
-    	}
+        var book = {
+            year: 2004,
+            edition: 1
+        }
+        Object.defineProperty(book, 'updateAll', {
+            get: function () {
+                return book;//此处可以自定义 别人访问时候返回什么，如果什么都不写 就代表这个属性不让访问
+                console.log(1);
+            },
+            set: function (val) {
+                if (val > 2004) {
+                    this.year = val;
+                    this.edition += val - 2004;
+                }
+            }
+        });
     </script>
 </body>
 <html>
