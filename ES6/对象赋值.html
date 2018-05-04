@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    "use strict";
+    let obj1={
+        a1:[1,2,3],
+        a2:"132",
+    }
+    let {a1,a2}=obj1;
+    console.log(a1, a2);//[123],132
+
+
+    let obj2={s:{n:"1"},n:[1,2,2,3],m:[[123]]}
+    let {m:[x1],s:{n},n:[,...x2]}=obj2;
+    console.log(x1, n, x2);//[123],1,[2,2,3]
+
+    let {length}="12345";//5
+    console.log(length);
+    // 因为右边是对象，所以会先把"12345"转换成对象然后再赋值，但是因为在这个对象（string）中刚好有个length的属性=5，所以你懂的
+    let {lengthh}="12345";
+    console.log(lengthh);//undfined,应该就是因为转换以后的对象没有lengthh这个属性。
+</script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+    // "use strict";
+  function n1(x=1,y) {}//函数的形参括号里面是一个单独的作用域，在使用的时候会先在当前小作用域找参数的值，没有再往上一级查
+let arr=[1,2,3,4]
+    console.log(eval("Math.max("+arr+")"));
+
+  // 箭头函数
+    function fn(x) {//通常
+        let a=1;
+        return a;
+    }
+    // 箭头函数没有this指向，它的this就是看它上一级作用域
+
+    let obj={
+        fn1:()=>{
+            console.log(this);
+        },
+        fn2:function () {
+            let fn3=()=>{
+                console.log(this);
+            }
+            let fn4=function () {
+                console.log(this);
+            }
+            console.log(this);
+            fn3();
+            fn4();
+        }
+    }
+    obj.fn1();//window，箭头函数指向的是作用域，但是因为obj是对象而不是作用域，所以会指向window
+    obj.fn2();//obj，this指向的是上一级this的指向   也就是obj
+
+
+
+
+</script>
+</html>

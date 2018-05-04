@@ -64,7 +64,7 @@
 </div>
 </body>
 <script type="text/javascript">
-    var slider=function(data){
+        function slider(data){
         this._slider=document.getElementById(data.objID);
         this.imgs=data.imgs;//图片列表
         this.imgrum=this.imgs.length;//图片
@@ -94,22 +94,7 @@
         this.imgright=this._slider.getElementsByClassName('imgright')[0];//
         let that=this;//that指向slider
         this.index=0;
-        Object.defineProperty(this,"_index",{
-            get:function (rum) {
-                return this.index;
-            },
-            set:function (rum) {
-                this.index=parseInt(rum);
-                this.lmg_show.getElementsByTagName("img")[0].setAttribute("src",this.imgs[this.index]);
-                Array.prototype.forEach.call(that.imglist.getElementsByTagName("img"), function(e) {
-                    e.className="";
-                });
-                // for(let i=0;i<that.imgrum;i++){
-                //     that.imglist.getElementsByTagName("img")[i].className="";
-                // }
-                that.imglist.getElementsByTagName("img")[that.index].className="active";
-            },
-        });
+
         for(let i=1;i<this.imgrum;i++){//根据图片添加右下角图标
             let img=document.createElement('img');
             img.setAttribute("src","img/icon-wtpt.png");
@@ -147,6 +132,26 @@
         this._slider.onmouseout=function () {
             that._timer=setInterval(that.imgright.onclick,2000);
         }
+        Object.defineProperty(this,"_index",{
+            get:function (rum) {
+                return this.index;
+            },
+            set:function (rum) {
+                this.index=parseInt(rum);
+                this.lmg_show.getElementsByTagName("img")[0].setAttribute("src",this.imgs[this.index]);
+                Array.prototype.forEach.call(that.imglist.getElementsByTagName("img"), function(e) {
+                    e.className="";
+                });
+                // for(let i=0;i<that.imgrum;i++){
+                //     that.imglist.getElementsByTagName("img")[i].className="";
+                // }
+                that.imglist.getElementsByTagName("img")[that.index].className="active";
+            },
+        });
+    }
+    slider.prototype={
+            a:1,
+            b:2
     }
     var xx=new slider({
         objID:"slider",

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    "use strict";
+    console.log('1111'.indexOf("1"));//0
+    //老方法indexOf   判断指定字符/串b是否在A中出现，否返回-1，是返回索引老方法
+    console.log("1111".includes("5"));//false
+    // includes和indexOf差不多，不过返回的是true和false
+
+    // 还有两个  startswith和endwith（是不是以、、、开头/结尾）
+    //以上四个都有默认的第二个参数（索引），从该索引开始查找的
+
+    console.log("sad".repeat(2));//"sadsad",repeat（n）方法重复n次以后返回，如果n不是整数则向下取整（2.6=2），负数会报错;
+    // 先进行取整，例如-0.3，会取整0，这样就不会报错  NaN就是0
+
+    console.log("sad".repeat("2"));//会先转换成数字
+
+
+</script>
+</html>

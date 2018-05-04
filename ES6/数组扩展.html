@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        li{
+            background: red;
+            height: 10px;
+            width: 20px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    "use strict";
+    console.log(Array(1, 2, 3, 4));//将传进来的内容转换成数组
+    console.log(Array(4));//表示创建一个长度为4的数组
+    console.log(Array("w"));//表示创建一个数组，第一个内容为w
+    console.log(Array.of(4));//表示创建一个数组，第一个内容为4
+    function ss(){
+        Array.copyWithin()//复制数组里的一些相邻数值，赋值给同一数组了的其他位置。
+        Array.find(function (item,index,input) {//find方法遍历数组，一旦某项返回true，就停止查找返回item，如果没有满足条件的项则返回undefined
+            //item表示当前项，index是当前下标，input是原数组
+        })
+        Array.findIndex();//和find一样  不过返回的是index   没有则返回-1
+        Array.fill(value,start,end);// 填充数组，第一个参数是填充的值，第二个是开始填充的位子默认0，end类似
+        //fill方法一样用来初始化，如arr.fill（1），就代表把每一项都变成1
+    }
+
+    let arr=[1,2,3,4]
+    console.log(arr.includes(2));//和indexOf一样   不过返回的会是true和false
+    let arr2=[1,,,2,,,]
+    arr2.forEach(function (item){//es5对数组中的空位一般都是直接跳过的;
+        console.log(item);//1,2
+    })
+    console.log(arr2.map(function (item) {//es6对所有的空位都会处理为undefined
+    }));
+    arr2.find(function (item) {
+        console.log(item);//1,undefied*2,2,undefined*2
+    })
+
+
+    //数组遍历方法 for of
+    let arr5=[5,4,3,2,1];
+    for (let item of arr5){
+        // console.log(item);//54321,item表示当前项
+    }
+    for (let index in arr5){
+        // console.log(index);//01234,index表示当前索引
+    }
+    for (let i of arr5.keys()){
+        // console.log(i);//01234,index表示当前索引
+    }
+    for (let [i,j] of arr5.entries()){
+        console.log(i,j);//返回当前项和当前索引组合起来的数组，索引在前面
+    }
+</script>
+</html>

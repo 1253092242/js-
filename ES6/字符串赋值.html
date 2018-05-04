@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    "use strict";
+    let [x,y,z]="123";
+    console.log(x, y, z);// 1 2 3  本来以为会是123  123  123的
+    let [a,b,c]="1234";
+    console.log(a, b, c);//1 2 3  看起来是根据下标赋值的
+
+    let [q,w,e]=["111","222","333","444"];
+    console.log(q, w, e);//111 222 333 数组赋值的规则和字符串是一样的
+    //
+    // let [q,w,...e]=["111","222","333","444"];
+    // console.log(q, w, e);//111 222 [333,444]
+
+</script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    "use strict";
+    let a="11",b="22";
+    let obj={
+        a:"333",
+        [a+b]:"5555",
+    }
+    console.log(obj);
+    //es6中属性名是一个变量   用中括号表示
+
+    // 方法
+
+    console.log(Object.is(NaN, NaN));//true  查看两个元素是否相等
+    Object.assign(obj1,obj2)//将obj2合并到obj1上，并返回obj1
+    Object.getOwnPropertyDescriptor()//获取对象私有属性
+    Object.keys()//返回一个数组，包括对象自身所有可以枚举的属性
+    Object.getOwnPropertyNames()//返回一个数组，包括对象自身所有可以枚举和不可枚举的属性
+</script>
+</html>

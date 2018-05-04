@@ -11,22 +11,18 @@
 <body>
    	<button class="button" onclick="click1(this)"></button>
     <script type="text/javascript">
-        var book = {
-            year: 2004,
-            edition: 1
-        }
-        Object.defineProperty(book, 'updateAll', {
-            get: function () {
-                return book;//此处可以自定义 别人访问时候返回什么，如果什么都不写 就代表这个属性不让访问
-                console.log(1);
-            },
-            set: function (val) {
-                if (val > 2004) {
-                    this.year = val;
-                    this.edition += val - 2004;
-                }
+
+        var a=1;
+        function  aa() {
+            console.log(a);
+            if(!a){
+                console.log(a);
+                let a=2;
+                console.log(a);
             }
-        });
+            console.log(a);
+        }
+        aa();
     </script>
 </body>
 <html>

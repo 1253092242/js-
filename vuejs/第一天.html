@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app" v-if="seen">
+    {{ message2 }}<br>
+    {{ message }}
+</div>
+
+<div id="app-4">
+    <ul>
+        <li v-for="list in todos">
+            {{ list.text }}
+        </li>
+    </ul>
+</div>
+
+<div id="app-7">
+    <ol>
+        <!--
+          现在我们为每个 todo-item 提供 todo 对象
+          todo 对象是变量，即其内容可以是动态的。
+          我们也需要为每个组件提供一个“key”，稍后再
+          作详细解释。
+        -->
+        <todo-item
+                v-for="item in groceryList"
+                v-bind:todo="item"
+                v-bind:key="item.id">
+        </todo-item>
+    </ol>
+</div>
+<script src="../js/jquery.min.js"></script>
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message2: '页面加载于 ' + new Date().toLocaleString(),
+            message: 'Hello Vue!',
+            seen:"true"
+        }
+    })
+    //猜想：vue构造方法中el属性绑定元素,data属性放置信息,data里的属性信息在app实例中，直属于app，在app实例中没有data属性
+    //会发现  不管是message或者message2都是可以实现数据响应的，并不是固定的message属性,那么是所有data里的属性在构造实例的时候
+    //都是创建访问器属性的么
+
+    //**发现一个有趣的事情，如果浏览器开启了外文翻译，dom内容会被替换   这时候数据绑定就不起作用了。
+
+    var app4 = new Vue({
+        el: '#app-4',
+        data: {
+            todos: [
+                { text: '学习 JavaScript' },
+                { text: '学习 Vue' },
+                { text: '整个牛项目' }
+            ]
+        }
+    })
+
+
+    Vue.component('todo-item', {
+        props: ['todo'],
+        template: '<li>{{ todo.text }}</li>'
+    })
+
+    var app7 = new Vue({
+        el: '#app-7',
+        data: {
+            groceryList: [
+                { id: 0, text: '蔬菜' },
+                { id: 1, text: '奶酪' },
+                { id: 2, text: '随便其它什么人吃的东西' }
+            ]
+        }
+    })
+</script>
+</body>
+</html>
