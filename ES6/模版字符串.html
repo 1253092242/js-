@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    "use strict";
+    let str='I love you';
+    document.body.innerHTML="<h1>"+str+"</h1>"
+
+    let str1=`<h1>${str}</h1>`
+    document.body.innerHTML+=str1;
+
+    let str2=`khkl
+    sadas
+    sad`
+
+    console.log(str2);
+
+    function fn(){
+        return 18;
+    }
+    let fn2=`函数的结果是${fn()}`;
+    let fn3="函数的结果是${fn()}"
+    console.log(fn2);//函数的结果是18
+    console.log(fn3);//函数的结果是${fn()}
+
+    let x=1;
+    let y=2;
+    console.log(`${x}+${y}=${x + y}`);//1+2=3
+    "尝试在传统字符串中使用ES6模版字符串"+"`${x}+${y}=${x + y}`".log
+</script>
+</html>

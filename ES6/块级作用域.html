@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>块级作用域</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    "use strict";
+    // function fn1() {
+    //     // console.log(a);
+    //     let a=1;
+    // }
+    // fn1();
+    // // console.log(a);//报错
+    //
+    //
+    // if(!a){
+    //     let a=1;
+    // }
+    // console.log(a);//报错
+    // fn1();
+    //
+
+
+    var a=1;
+    // function aa() {
+    //     console.log(a);//1
+    // }
+    // aa();
+    if (a){
+        console.log(a);//not defined
+        var b=11;
+        let a=2;//没有报错
+        console.log(a);//2
+    }
+    console.log(a);//1
+    console.log(b);//11
+
+    // 总结：文件解析时，会先预解释定义关键词，如function，var，如var a=1; 执行时会在文件头部先定义a，此时它的值是undefined
+    // 然后在执行到a=1时才会给它赋值，但是预解释到let会在头部清除所有的同名变量  然后在执行到这条语句的时候声明且赋值。
+    // 应该是为了保证同一作用域一个变量的绝对性。
+
+</script>
+</html>
