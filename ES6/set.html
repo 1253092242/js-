@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    "use strict";
+    //ES6新的数据格式
+     let set1=new Set([1,1,2,64,58,2,NaN,NaN]);
+    console.log(set1);//{1, 2, 64, 58, NaN},返回一个set的实例，这个实例是一个类数组，可以用数组展开符转换成数组[...ste1],
+
+
+    //原型方法：
+    set1.add()//添加一个set1中不存在的项，因为不允许重复
+    set1.has()//判断是否存在某一项，返回true和false
+    set1.delete()//删除某项，返回true和false
+    set1.clear()//清空，没有返回值，undefined
+
+
+
+
+
+    // 总结：1.set可以用来数组去重；
+            let arr1=[1,2,3,4,5]
+            let arr2=[5,4,8,9]
+            console.log(new Set([...arr1,...arr2]))
+            arr1.filter((x)=>{arr2.filter((item)=>{item=x})})
+</script>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    "use strict";
+    //map的参数是数组，且这个数组的每一项都是数组，子数组有两项，第一项是键key 第二项是值value
+    let map1=new Map([["a",1],["b",2],[{a:1},2]])
+    console.log(map1);
+    //get(key)方法
+    console.log(map1.get("a"));
+    //set(key,value)设置,set方法如果key已经存在则按照参数修改value，没有则添加键值对
+    map1.set("a",5)
+    map1.set("j",5)
+    console.log(map1);
+    console.log(map1.has("j"));//和set差不多   也有clear  has  和delete方法
+
+
+    //数组转换map
+    let arr2=[1,2,3,4,5,6]
+    var map2=new Map();
+    arr2.forEach((item,index)=>{
+        map2.set(index+1,arr2.slice(0,index+1))
+    })
+    console.log(map2);
+
+
+    //遍历foreach(),keys(),values(),entries()
+    map2.forEach((val,key,map)=>{
+
+    })
+    for(var key of map2.keys()){
+        console.log(key);
+    }
+    for(var value of map2.values()){
+        console.log(value);
+
+    }
+    for(var en of map2.entries()){
+        console.log(en);
+
+    }
+</script>
+</html>
