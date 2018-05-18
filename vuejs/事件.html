@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app1">
+        <ul><li v-for="(x,y) in todos"><button @click="fn1(y)">{{x}}</button></li></ul>
+    </div>
+    <div id="app2">
+        <input type="text" v-model="inputval" @keyup.13="fn2($event)">
+        <p>{{inputval}}</p>
+        <ul><li v-for="todo in arr">{{todo}}</li></ul>
+    </div>
+</body>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    let app1=new Vue({
+        el:"#app1",
+        data:{
+            todos:[1,2,3,4]
+        },
+        methods:{
+            fn1(index){
+                console.log(index);
+            },
+        }
+    })
+
+    let app2=new Vue({
+        el:"#app2",
+        data:{
+            inputval:"",
+            arr:[]
+        },
+        methods:{
+            fn2(e){
+                    this.arr.push(this.inputval)
+                    this.inputval=''
+            },
+        }
+    })
+    //v-on绑定事件可以简写为@，事件统一在创建实例的时候写在methods内，而这些事件中的this统一指向创建的实例
+</script>
+</html>

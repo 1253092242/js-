@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app1">
+    <input type="text" v-model="msg">
+    <input type="text" v-model="msg">
+    {{msg}}
+    <p v-once>{{msg}}</p>
+    <p v-html="dom"></p>
+    <p v-text="dom"></p>
+    <ul><li v-for="(x,index) in arr">a={{x.a}}b={{x.b}}//{{index}}</li></ul>
+    <ul><li v-for="x in 30">{{x}}</li></ul>
+</div>
+</body>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+   var app1=new Vue({
+        el:"#app1",
+       data:{
+           msg:"ssss",
+           dom:"<h1>sssss</h1>",
+           arr:[{a:1,b:2},{a:3,b:4}]
+       }
+    })
+</script>
+</html>

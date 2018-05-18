@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="test1">
+        {{todo.messsage}}
+    </div>
+</body>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    var test1=new Vue({
+        el:"#test1",
+        data:{
+            todo:{
+
+            }
+
+        }
+    })
+    test1.$set(test1.todo,"messsage","ssasssdss");
+    //set 可以添加和修改属性，但是注意：不能直接在实例上创建属性或者对象（但是可以修改属性值），如果是创建则必须是在实例里的某一个对象内才行。
+
+
+
+</script>
+</html>

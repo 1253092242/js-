@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app1" @click.self="fn1" style="width: 800px;height: 600px;background: red">sss1
+            <!--只能在当前元素触发，大概理解成不会被冒泡-->
+        <div id="app2" @click.once="fn2" style="width: 400px;height: 300px;background: #888888">ddd2
+            <!--只绑定一次-->
+            <div id="app3" @click.stop="fn3" style="width: 200px;height: 100px;background: #666666">ffff3</div>
+            <!--不会冒泡-->
+        </div>
+    </div>
+</body>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    let app1=new Vue({
+        el:"#app1",
+        data:{},
+        methods:{
+            fn1(){console.log(1);},
+            fn2(){console.log(2);},
+            fn3(){console.log(3);}
+        }
+    })
+
+
+    // 还有click.capture：事件捕获，就是代表不管是不是当前触发元素，它都会被先执行。
+    // click.prevent：可以去掉a标签默认的click页面跳转功能
+    // 最重要的是，以上修饰符可以重叠使用。如@click.stop.once=“fn”
+</script>
+</html>
