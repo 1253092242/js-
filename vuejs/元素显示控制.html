@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app1">
+        <p v-show="a">随时随地岁的</p>
+        <p v-if="b">wwwww</p>
+    </div>
+</body>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    "use strict";
+let app1=new Vue({
+    el:"#app1",
+    data:{
+        a:true,
+        b:false,
+    }
+})
+    //v-show是控制元素是否被显示，v-if是控制元素是否被渲染。
+    //另外v-show不适合在tamplate中使用，只能用v-if
+</script>
+</html>

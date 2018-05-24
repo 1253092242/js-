@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app1">
+        <button @click="sss">变好</button>
+        <button @click="ssss">变坏</button>
+        {{val}}{{wait}}
+</div>
+</body>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    var app1=new Vue({
+        el:"#app1",
+        data:{
+            val:"爱心",
+            wait:""
+
+        },
+        methods:{
+            sss(){
+                this.val="变好"
+            },
+            ssss(){
+                this.val="变坏"
+            }
+        },
+        watch:{
+            val(newval,oldval){
+                this.wait="稍等变心中";
+                setTimeout(()=>{
+                    this.wait="变心完成";
+                },2000)
+            }
+        }
+    })
+
+    // 总结：watch属性用来监听变量属性值是否变化，其监听的属性名和监听方法名需要一致。但是该监听默认是浅层监听，如监听对象的属性值又是一个对象这种，
+    //如果需要深层次监听，需要在方法后面加上"，deep:true"
+
+</script>
+</html>

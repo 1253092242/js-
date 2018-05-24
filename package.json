@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/1253092242/js-note#readme",
   "dependencies": {
+    "boostrap": "^2.0.0",
     "vue": "^2.5.16"
   }
 }

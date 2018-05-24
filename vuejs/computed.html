@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app1">
+        {{newval}}
+    </div>
+</body>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    "use strict";
+    var app1=new Vue({
+        el:"#app1",
+        data:{
+            val:6,
+
+        },
+        computed:{
+            newval:{
+                get(){
+                    console.log(1);
+                    return this.val%2==0?"偶数":"奇数"
+                },
+                set(){
+
+                }
+            }
+        }
+    })
+
+    // 总结：computed计算属性很有意思，它就相当于js访问器属性，不同的是，当这个属性用到的变量发生变化的时候，该属性也会随之更新，
+    //列如全选功能，当下面的选择框内容发生变化的时候，可以计算当前是不是所有的选择框都被选中，如果true就让全选，
+    //在当前页面有某个属性需要以某个别的属性为基础的时候很有用
+
+</script>
+</html>
