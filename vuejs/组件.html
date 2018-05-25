@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/vue/2.1.3/vue.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<div id="app1">
+    <ahead v-for="name in names" :name="name"></ahead>
+    <alert-box>
+        Something bad happened.
+    </alert-box>
+</div>
+</body>
+<script type="text/javascript">
+    Vue.component("ahead",{
+        data:function () {
+            return{
+
+            }
+        },
+        methods:{
+            x(index){
+                this.a.push({c:"你点击第"+index+"个按钮"});
+            }
+        },
+        props:['name'],
+        template:"<ul><li>{{name}} </li></ul>"
+    })
+    Vue.component('alert-box', {
+        template: '<div class="demo-alert-box"><strong>Error!</strong><slot></slot></div>'
+    })
+    var x=new Vue({
+        el:"#app1",
+        data:{
+            a:"1",
+            names:["one","two","three"]
+        }
+    })
+</script>
+</html>
