@@ -7,7 +7,7 @@
 </head>
 <body>
 <div id="app1">
-    <ahead v-for="name in names" :name="name"></ahead>
+    <ahead v-for="name in names" :name="name" :class="{'classs1':sss,'class2':ssss}"></ahead>
     <alert-box>
         Something bad happened.
     </alert-box>
@@ -35,7 +35,9 @@
         el:"#app1",
         data:{
             a:"1",
-            names:["one","two","three"]
+            names:["one","two","three"],
+            sss:"true",
+            ssss:"true",
         }
     })
 </script>

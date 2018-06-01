@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>内层函数</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    //看到这么一个面试题，用来解决add(1)(2)(3)(4)...的问题，有点看不懂  自己先想想有没有什么方法
+    var add = function(x){
+    var sum = 1;
+    var tmp = function(x){
+        sum = sum + x;
+        return tmp;
+    }
+    tmp.toString = function(){
+        return sum;
+    }
+    return tmp;
+    } // alert(add(1)(2)(3)) --> 6
+    add(1)(2)(3)
+
+    //第一步。会发现这样  add2会return ad（）但是只会调用一次  所以应该在ad内部再return一次
+    var add2=function (x) {
+        var sum=x;
+        var ad=function (x) {
+            sum=sum+x;
+            console.log(sum);
+            return ad;
+        }
+        return ad;
+    }
+    //顺便打印sum看看，
+    console.log(add2(1)(2)(3)(4));;//在30行输出 2， 5 ，9
+    //为什么不是预料中的1，3，6，10呢，原来是因为add2(1)返回的是ad 此时的sum依然是0  所以应该改成sum=x就对了
+
+    //可是怎么获取最终的结果（sum）呢，函数每次都是返回的内部ad函数，如果直接打印 console.log(add2(1)(2)(3)(4))输出的就是最后一次return的ad函数ƒ (x) {sum=sum+x;console.log(sum);return ad;}
+    //通过上面题目得知，可以用tostring来返回sum，可是这是什么原理呢？
+    var add2=function (x) {
+        var sum=x;
+        var ad=function (x) {
+            sum=sum+x;
+            console.log(sum);
+            return ad;
+        }
+        ad.toString = function(){
+            return sum;
+        }
+        return ad;
+    }
+
+    // 测试一下
+    function  fn1() {
+        console.log(1);
+        return fn2;
+        console.log(2);
+    }
+    let fn2=function (){
+        console.log("fn2执行")
+    }
+    fn2.toString=function(){
+        console.log("toString执行")
+        return 1;
+    }
+    console.log(fn1());//"toString执行"输出两次
+    //在w3c查询以后得到"对象被用于字符串环境中时，此方法会被自动调用。",  所以逻辑应该是：log  fn1()=>fn2的函数体，在这个时候 tostring方法被自动调用，return了1；
+
+
+    // 但是在这中间又发现了一个问题：在浏览器中测试的时候居然是先打印的1  再打印的：“toString执行”，
+</script>
+</html>

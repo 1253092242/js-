@@ -18,13 +18,18 @@
     <div id="aaa" style=""></div>
 
     <script type="text/javascript">
-
-        var app1=new Vue({
-            el:"#app1",
-            data:{
-                a:false,
-            }
-        })
+        "use strict";
+     let fn1=function() {
+         return fn2;
+     }
+     let fn2=function (){
+            console.log("fn2执行")
+     }
+     fn2.toString=function(){
+         console.log("toString执行")
+         return 1;
+     }
+     console.log(fn1());
     </script>
 </body>
 <html>
