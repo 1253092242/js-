@@ -68,5 +68,19 @@
         }
     }
     console.log(fn1.fn2())
+
+
+
+    const x=[
+        {city:"a",type:1,code:"122"},
+        {city:"d",type:2,code:"122"},
+        {city:"b",type:1,code:"122"},
+        {city:"c",type:2,code:"122"},
+    ]
+
+
+    function classType(arr){
+        arr.map(item=>{item.citys={'city':item.city,'code':item.code};item.city=item.type=null})
+    }
 </script>
 </html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id='canvas' width='600' height='600'></canvas>
+</body>
+<script>
+   var ctx;
+function draw(){
+    var canvas = document.getElementById('canvas');
+    if (!canvas.getContext) return;
+    var ctx = canvas.getContext("2d");
+    
+    ctx.save(); 
+    ctx.fillStyle='Red';
+    ctx.fillRect(0, 0, 100, 100);
+    ctx.transform(2,0,0,1,0,0);
+    ctx.fillStyle='Green';
+    ctx.fillRect(100, 100, 100, 100);
+    ctx.fillRect(400, 400, -100, -100);
+    ctx.restore(); 
+//b
+    ctx.save(); 
+    ctx.translate(200, 200);//为了方便观察，将原点移到（200，200）的位置
+    ctx.beginPath();//开始画线
+    ctx.moveTo(0,0);//将起点移到下面
+    ctx.lineTo(100, 0);
+    ctx.closePath();
+    ctx.strokeStyle='Red';//画红线
+    ctx.stroke();
+    ctx.beginPath();//开始画线
+    ctx.arc(0,0, 100, 0, Math.PI/4 , false);
+    ctx.stroke();
+    ctx.transform(1,1,0,1,0,0);//x轴倾斜
+    ctx.beginPath();//开始画线
+    ctx.moveTo(0,0);//将起点移到下面
+    ctx.lineTo(200, 0);
+    ctx.strokeStyle='Green';//画绿线
+    ctx.closePath();
+    ctx.stroke();
+    // ctx.fillRect(0, 0, 100, 100);//画一个100*100的矩形
+    // ctx.restore(); 
+}
+draw();
+</script>
+</html>

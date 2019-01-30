@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="public.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class='content'>
+        <h1>先学习一下2D绘图</h1>
+        <h3>1.创建画布对象</h3>
+        <pre>
+            <xmp><canvas id="tutorial" width="300" height="300"></canvas></xmp>
+            function draw(){
+                var canvas = document.getElementById('tutorial');
+                if(!canvas.getContext) return;
+                var ctx = canvas.getContext("2d");
+                ctx.fillStyle = "rgb(200,0,0)";
+                  //绘制矩形
+                ctx.fillRect (10, 10, 55, 50);
+        
+                ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+                ctx.fillRect (30, 30, 55, 50);
+            }
+            draw();
+        </pre>
+        <p class='isay'>
+            以上先是拿到canvas  Dom元素 然后用getContext创建一个2d。。画板？
+            然后fillRect填充一个矩形（fillRect，strokeRect，clearRect分别是填充，描边和清除），参数依次为矩形左上角x坐标 、 y坐标 、 宽度 、 高度<br>
+            因为原生方法只提供了矩形的绘制，其他的形状就得用路径了
+            
+        </p>
+        <h3>2.路径绘图</h3>
+        <pre>
+                创建路径起始点
+                调用绘制方法去绘制出路径
+                把路径封闭
+                一旦路径生成，通过描边或填充路径区域来渲染图形。
+                -------------------------------------------
+                1.beginPath()
+
+                新建一条路径，路径一旦创建成功，图形绘制命令被指向到路径上生成路径
+                
+                2.moveTo(x, y)
+                
+                把画笔移动到指定的坐标(x, y)。相当于设置路径的起始点坐标。
+                2.1   lineTo(x, y)
+                
+                把画笔移动到指定的坐标(x, y)。画一条直线
+                
+                3.closePath()
+                
+                闭合路径之后，图形绘制命令又重新指向到上下文中
+                
+                4.stroke()
+                
+                通过线条来绘制图形轮廓
+                
+                5.fill()
+                
+                通过填充路径的内容区域生成实心的图形
+
+            -------------------------------------------
+            绘制三角形：
+            function draw(){
+                var canvas = document.getElementById('tutorial');
+                if (!canvas.getContext) return;
+                var ctx = canvas.getContext("2d");
+                ctx.beginPath();
+                ctx.moveTo(50, 50);
+                ctx.lineTo(200, 50);
+                ctx.lineTo(200, 200);
+                  ctx.closePath(); //虽然我们只绘制了两条线段，但是closePath会closePath，仍然是一个3角形
+                ctx.stroke(); //描边。stroke不会自动closePath()
+            }
+        </pre>
+
+        <h3>3绘制圆弧</h3>
+        <pre>
+                arc(x, y, r, startAngle, endAngle, anticlockwise):
+
+                以(x, y)为圆心，以r为半径，从 startAngle弧度开始到endAngle弧度结束。anticlosewise是布尔值，true表示逆时针，false表示顺时针。(默认是顺时针)
+                
+                例如：ctx.arc(300,300, 100, 0, Math.PI , false); 画出来是一个半圆,起点0代表的是从3点钟方向开始 ，Math.PI就是180度 可以进行数学运算比如Math.pi/2。
+
+                
+                ctx.arcTo(x1,y1,x2,y2,radius);有点难说清楚，具体可以参照https://www.cnblogs.com/ppforever/p/3915135.html    先放着吧  不知道有没有用
+        </pre>
+        <h3>贝塞尔曲线</h3>
+        <pre>
+            ctx.quadraticCurveTo(x1,x2,y1,y2)
+            加上起点一共是三个点，二次贝塞尔曲线需要两个点。第一个点是用于二次贝塞尔计算中的控制点，第二个点是曲线的结束点。曲线的开始点是当前路径中最后一个点
+
+
+            ctx.bezierCurveTo(50,100,200,100,200,20);
+            三次贝塞尔曲线需要三个点。前两个点是用于三次贝塞尔计算中的控制点，第三个点是曲线的结束点。曲线的开始点是当前路径中最后一个点
+        </pre>
+        <p class="isay">
+            一个计算机画弧线的算法方法，具体不是很懂，用到的时候再了解吧   需要了解数学算法*-* 
+        </p>
+        <h3>透明度</h3>
+        <pre>
+            ctx.globalAlpha=0.1;
+            整个canvas的透明度都会变。
+        </pre>
+        <h3>线属性</h3>
+        <pre>
+            ctx.lineWidth = 10;
+            线宽度
+
+            ctx.lineCap="round";
+            butt	默认。向线条的每个末端添加平直的边缘。
+            round	向线条的每个末端添加圆形线帽。
+            square	向线条的每个末端添加正方形线帽。
+
+            ctx.lineJoin = 
+            bevel	创建斜角。
+            round	创建圆角。
+            miter	默认。创建尖角。
+
+            虚线有demo，不怎么看得懂，先放着
+            备注：
+​	         getLineDash():返回一个包含当前虚线样式，长度为非负偶数的数组。
+        </pre>
+        <h3>给文本添加样式</h3>
+        <pre>
+            font = value
+
+            当前我们用来绘制文本的样式。这个字符串使用和 CSS font属性相同的语法. 默认的字体是 10px sans-serif。
+            
+            textAlign = value
+            
+            文本对齐选项. 可选的值包括：start, end, left, right or center. 默认值是 start。
+            
+            textBaseline = value
+            
+            基线对齐选项，可选的值包括：top, hanging, middle, alphabetic, ideographic, bottom。默认值是 alphabetic。
+            
+            direction = value
+            
+            文本方向。可能的值包括：ltr, rtl, inherit。默认值是 inherit。
+
+            context.font = 'bold 35px Arial';
+            context.textAlign = 'center';
+            context.textBaseline = 'bottom';
+            context.fillStyle = '#ccc';
+            context.strokeText("Hello Canvas", 150, 100);
+            context.fillText("Hello Canvas", 180, 140);     
+        </pre>
+        <p class="isay">还没教我怎么加文本呢。。补上：ctx.fillText("Hello Canvas", 180, 140)</p>
+
+
+        <h3>绘制图片</h3>
+        <pre>
+            var img = new Image();   // 创建img元素 ,这里也可以用页面已经有的img对象
+            img.onload = function(){
+                ctx.drawImage(img, 0, 0)
+            }
+            img.src = 'myImage.png'; // 设置图片源地址 
+
+
+
+            JavaScript 语法 1
+            在画布上定位图像：
+            context.drawImage(img,x,y);
+            JavaScript 语法 2
+            在画布上定位图像，并规定图像的宽度和高度：
+            context.drawImage(img,x,y,width,height);
+            JavaScript 语法 3
+            剪切图像，并在画布上定位被剪切的部分：
+            context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
+
+            sx	可选。开始剪切的 x 坐标位置。
+            sy	可选。开始剪切的 y 坐标位置。
+            swidth	可选。被剪切图像的宽度。
+            sheight	可选。被剪切图像的高度。
+        </pre>
+        <h3>状态的保存和恢复</h3>
+        <pre>
+            save()和restore()
+
+        ​	save 和 restore 方法是用来保存和恢复 canvas 状态的，都没有参数。
+        
+        ​	Canvas 的状态就是当前画面应用的所有样式和变形的一个快照。
+            
+            关于 save()
+            
+            Canvas状态存储在栈中，每当save()方法被调用后，当前的状态就被推送到栈中保存。一个绘画状态包括：
+            
+            当前应用的变形（即移动，旋转和缩放）
+            
+            strokeStyle, fillStyle, globalAlpha, lineWidth, lineCap, lineJoin, miterLimit, shadowOffsetX, shadowOffsetY, shadowBlur, shadowColor, globalCompositeOperation 的值
+            
+            当前的裁切路径（clipping path）
+
+            可以调用任意多次 save方法。(类似数组的push())
+
+
+            关于restore()
+
+            每一次调用 restore 方法，上一个保存的状态就从栈中弹出，所有设定都恢复。(类似数组的pop())        
+        </pre>
+        <p class="isay">小游戏回到上一关？？？</p>
+        <h3>translate</h3>
+        <pre>
+            ctx.translate(x, y);
+            修改canvas的原点坐标，修改以后的原点不再是左上角。
+        </pre>
+        <p class="isay">可以把原点改到中间，整个canvas就变成了xy轴+4象限</p>
+        <h3>rotate</h3>
+        <pre>
+            ctx.rotate(20*Math.PI/180);
+            顺时针旋转20度
+        </pre>
+        <p class="isay">就是把xy轴旋转20度呗</p>
+        <h3>scale</h3>
+        <pre>
+            var c=document.getElementById("myCanvas");
+            var ctx=c.getContext("2d");
+            ctx.strokeRect(5,5,25,15);
+            ctx.scale(2,2);
+            ctx.strokeRect(5,5,25,15);
+            默认情况下，canvas 的 1 单位就是 1 个像素。
+            举例说，如果我们设置缩放因子是 0.5，1 个单位就变成对应 0.5 个像素，
+            这样绘制出来的形状就会是原先的一半。同理，设置为 2.0 时，
+            1 个单位就对应变成了 2 像素，绘制的结果就是图形放大了 2 倍。
+        </pre>
+        <p class="isay">就是改变画布的单位长度呗</p>
+        <h3>transform</h3>
+        <pre>
+            var c=document.getElementById("myCanvas");
+            var ctx=c.getContext("2d");
+            
+            ctx.fillStyle="yellow";
+            ctx.fillRect(0,0,250,100)
+            
+            ctx.transform(1,0.5,-0.5,1,30,10);
+            ctx.fillStyle="red";
+            ctx.fillRect(0,0,250,100);
+            
+            ctx.transform(1,0.5,-0.5,1,30,10);
+            ctx.fillStyle="blue";
+            ctx.fillRect(0,0,250,100);
+
+            a	水平缩放绘图
+            b	水平倾斜绘图
+            c	垂直倾斜绘图
+            d	垂直缩放绘图
+            e	水平移动绘图
+            f	垂直移动绘图
+        </pre>
+        <p class="isay">https://juejin.im/post/5c46863151882524106089e8</p>
+        <h3>合成</h3>
+        <pre>
+            ctx.globalCompositeOperation="destination-over";
+
+            source-over	        默认设置，新图像会覆盖在原有图像。
+            source-atop	        新图像仅仅显示与老图像重叠区域。老图像仍然可以显示。
+            source-in	        仅仅会出现新图像与原来图像重叠的部分，其他区域都变成透明的。(包括其他的老图像区域也会透明)
+            source-out	        仅仅显示新图像与老图像没有重叠的部分，其余部分全部透明。(老图像也不显示)
+            destination-over	新图像会在老图像的下面。
+            destination-atop	老图像仅仅仅仅显示重叠部分，新图像会显示在老图像的下面。
+            destination-in	    仅仅新老图像重叠部分的老图像被显示，其他区域全部透明。
+            destination-out	    仅仅老图像与新图像没有重叠的部分。 注意显示的是老图像的部分区域。
+            lighter	            新老图像都显示，但是重叠区域的颜色做加处理
+            copy	            显示源图像。忽略目标图像。
+            xor	                只有新图像会被保留，其余的全部被清除(边透明
+        </pre>
+        <p class="isay">图层合并呗</p>
+        <h3>动画</h3>
+        <pre>
+            1.清空canvas
+
+            再绘制每一帧动画之前，需要清空所有。清空所有最简单的做法就是clearRect()方法
+            
+            2.保存canvas状态
+            
+            如果在绘制的过程中会更改canvas的状态(颜色、移动了坐标原点等),又在绘制每一帧时都是原始状态的话，则最好保存下canvas的状态
+            
+            3.绘制动画图形
+            
+            这一步才是真正的绘制动画帧
+            
+            4.恢复canvas状态
+            
+            如果你前面保存了canvas状态，则应该在绘制完成一帧之后恢复canvas状态。
+
+
+            我们可用通过canvas的方法或者自定义的方法把图像会知道到canvas上。正常情况，我们能看到绘制的结果是在脚本执行结束之后。例如，我们不可能在一个 for 循环内部完成动画。
+            也就是，为了执行动画，我们需要一些可以定时执行重绘的方法。
+
+            一般用到下面三个方法：
+
+            setInterval()
+            setTimeout()
+            requestAnimationFrame()
+        </pre>
+        <h3>直线渐变</h3>
+        <pre>
+            //（5）设置渐变色
+            //createLinearGradient方法用来设置渐变色。
+
+            var myGradient = ctx.createLinearGradient(0, 0, 0, 160); 
+
+            myGradient.addColorStop(0, "#BABABA"); 
+
+            myGradient.addColorStop(1, "#636363");
+            //createLinearGradient方法的参数是(x1, y1, x2, y2)，其中x1和y1是起点坐标，x2和y2是终点坐标。通过不同的坐标值，可以生成从上至下、从左到右的渐变等等。使用方法如下：
+
+            ctx.fillStyle = myGradient;
+            ctx.fillRect(10,10,200,100);
+        </pre>
+    </div>
+</body>
+</html>

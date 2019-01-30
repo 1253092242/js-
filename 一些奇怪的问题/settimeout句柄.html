@@ -2,12 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
 </head>
 <body>
-$END$
+
 </body>
 <script type="text/javascript">
-    "use strict";
+    function CheckImgExists(imgurl){//判断图片是否存在
+        var ImgObj = new Image();
+        ImgObj.src = imgurl;
+        //没有图片，则返回-false
+        var timer=setTimeout(function () {
+            if (ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0)) {
+                return  true;
+            }
+            else {
+                return  false;
+            }
+        },50);
+        var z=timer();
+        console.log(z);
+    }
+    // 用意是用来调用settimeout函数的，结果输出的z是26，大佬告诉这是settimeout的句柄。查了一番资料
+    // 大致能理解句柄是什么，可是很奇怪为什么在settimeout这里要用一个数字来作为句柄赋值给timer，而不是
+    // 直接将timer作为句柄呢？？？？？
 </script>
 </html>

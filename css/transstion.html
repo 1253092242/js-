@@ -3,19 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <style type="text/css">
-        div{
-            width: 200px;
-            height: 200px;
+        #needlist li{
+            height: 166px;
+            width: 310px;
+            float: left;
+            margin: 5px;
+            border: 1px #fafafa solid;
+        }
+        #needlist h3{
+            word-break:keep-all;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            text-align: center;
+            color: #0e93d7;
+        }
+        #needlist h3 a{
+            color: #0e93d7;
+        }
+        #needlist li p{
+            word-break:keep-all;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            margin: 10px 0;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            color: #0e93d7;
+        }
+        .hover_bc{
+            width: 100%;
+            height:100%;
+            background-image: url("http://www.baidu.com/img/bdlogo.png");
+            background-repeat:no-repeat;
+            background-position:100% 50%;
+            background-size:0 0;
+            transition: all .2s;
+        }
+        .hover_bc *{
+            margin: 0;
+        }
+        .hover_bc:hover{
+            background-image: url("http://www.baidu.com/img/bdlogo.png");
+            background-position:0 0;
+            background-size:cover;
         }
     </style>
 </head>
 <body>
-        <div>
-
+<ul id="needlist">
+    <li v-for="todo in todos">
+        <div  class="hover_bc" >
+            <h3><a :href="'professionalServices/show_need.html?'+todo.id">{{todo.name}}</a></h3>
+            <p>剩余{{todo.timeplus}}天&nbsp&nbsp&nbsp￥{{todo.price}}</p>
+            <p>{{todo.describe}}</p>
         </div>
+    </li>
+    <div class="clear"></div>
+</ul>
 </body>
 <script type="text/javascript">
     "use strict";
+    var needlist=new Vue({
+        el:"#needlist",
+        data:{
+            todos:[0,0,0,0]
+        },
+        methods:{
+
+        }
+    })
 </script>
 </html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id='canvas' width='600' height='600'></canvas>
+</body>
+<script>
+    var ctx = canvas.getContext("2d");
+function draw(){
+    var canvas = document.getElementById('canvas');
+    if(!canvas.getContext) return;
+    // 二次贝塞尔曲线
+    ctx.beginPath();
+    ctx.moveTo(20,20)
+    ctx.strokeStyle='Green';
+    ctx.quadraticCurveTo(20,100,200,20)
+    ctx.stroke();
+
+
+    ctx.beginPath();
+    ctx.moveTo(50, 50);
+  	//参数1、2：控制点1坐标   参数3、4：控制点2坐标  参数4：圆弧半径
+    ctx.bezierCurveTo(50,100,200,100,200,20);
+    ctx.strokeStyle='Red';
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.fillRect(50,50,3,3)
+    ctx.fillRect(50,100,3,3)
+    ctx.fillRect(200,100,3,3)
+    ctx.fillRect(200,20,3,3)
+    
+    
+                // ctx.fillRect (10, 10, 55, 50);
+    }
+            draw();
+</script>
+</html>

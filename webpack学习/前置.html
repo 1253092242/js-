@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="public.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="content">
+            <h1 class="head">在学习webpack前，需要先了解这些前置内容（有助于理解webpack的功能）</h1>
+            <h3 class="head">conmonjs</h3>
+            <div class="quote">
+                CommonJS ( http: //www.commonjs.org ）是一种被广泛使用的 JavaScript 模块化规范，其
+                核心思想是通过 require 方法来同步加载依赖的其他模块，通过 module.exports 导 出需
+                要暴露的接口。 CommonJS 规范的流行得益于 Node.js 采用了这种方式，后来这种方式被 引入
+                到了网页 开发中。</br></br>
+                ／／ 导入</br>
+                const moduleA = require ( ’. / moduleA ’); </br>
+                ／／ 导出</br>
+                module .exports = moduleA.someFunc;</br>
+            </div>
+
+
+            <h3 class="head">AMD</h3>
+            <div class="quote">
+                    AMD ( https://en.wikipedia.org/wiki/Asynchronous_module_ definition ）也是一种 JavaScript
+                    模块化规范，与 CommonJS 最大的不同在于，它采用了异步的方式去加载依赖的模块。 AMD
+                    规范主要用于解决针对浏览器环境的模块化问题，最具代表性的实现是 requirejs (http:// 
+                    requirejs. org ） 。</br></br>
+                    <code>
+                        ／／ 定义一个模块</br>
+                        de fine (’ module ’,[’dep ’] , function (dep) { </br>
+                            return exports; </br>
+                        });</br>
+                    </code>
+                    
+                    <code>
+                        ／／导入和使用</br>
+                        require ( [’ module ’] , function (module) { </br>
+                        });</br>
+                    </code>
+            </div>
+
+
+            <h3 class="head">ES6 模块化</h3>
+            <div class="quote">
+                    ES6 模块化是国际标准化组织 ECMA 提出的 JavaScript 模块化规范，它在语言层面上实
+                    现了模块化。浏览器厂商和 Node . 都宣布要原生支持该规范 。 它将逐渐取代 CommonJS 和
+                    AMD 规范，成为浏览器和服务器通用的模块解决方案 。</br></br>
+                    <code>
+                        ／／ 导入</br>
+                        import { readFile } from ’ fs ’; </br>
+                        import React from ’ react ’ ; </br>
+                        ／／ 导出</br>
+                        export function hello {) { } ;  </br>
+                        export default {  </br>
+                            //...</br>
+                        );</br>
+                    </code>
+                    
+                    <code>
+                        ／／导入和使用</br>
+                        require ( [’ module ’] , function (module) { </br>
+                        });</br>
+                    </code>
+            </div>
+
+
+            <h3 class="head">样式文件中的模块化</h3>    
+            <div class="quote">
+                    除了 JavaScript 开始进行模块化改造，前端开发里的样式文件也支持模块化。以 scss 为
+                    例，将一些常用的样式片段放进一个通用的文件里，再在另 一个文件里通过＠ import 语句导
+                    入和使用这些样式片段 ：</br></br>
+                    <code>
+                        //itil. scss 文件</br>
+                        ／／定义样式片段</br>
+                        @mixin center { </br>
+                        ／／水平坚直居中</br>
+                        position: absolute ; </br>
+                        left: 50 % ;</br>
+                        top : 50 % ;</br>
+                        transform : translate(  50 % , 50 % ）;</br>
+                    </br>
+                        //main.scss 文件</br>
+                        ／／导入和使用 util.scss 中定义的样式片段</br>
+                        @import ” uti l ”; </br>
+                        #box{ </br>
+                        @include center ; </br>
+                        }</br>
+                    </code>
+                    
+                    <code>
+                        ／／导入和使用</br>
+                        require ( [’ module ’] , function (module) { </br>
+                        });</br>
+                    </code>
+            </div>
+            
+    </div>
+</body>
+</html>

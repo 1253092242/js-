@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id='canvas' width='600' height='600'></canvas>
+</body>
+<script>
+    var ctx = canvas.getContext("2d");
+function draw(){
+    var canvas = document.getElementById('canvas');
+    if(!canvas.getContext) return;
+
+         ctx.lineDashOffset = 3;  //设置虚线的偏移量(线不偏移,只是虚的位置偏移)
+        ctx.setLineDash( [ 5, 4, 3] );  //实线部分和白线部分的大小依次是5,4,3,5,4,3...
+        ctx.moveTo( 10, 10 );
+        ctx.lineTo( 310, 10 );
+        ctx.stroke();
+
+    
+    
+                // ctx.fillRect (10, 10, 55, 50);
+    }
+            draw();
+</script>
+</html>

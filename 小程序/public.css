@@ -1,0 +1,35 @@
+.content{
+    width: 980px;
+    margin:0 auto;
+    color: #888888;
+    border-left: #666666 1px solid;
+    border-right: #666666 1px solid;
+    height: 100%;
+    min-height: 960px
+}
+.content h3{
+        font-size: 20px;
+}
+.content h1{
+    font-size: 28px;
+    color: red !important
+}
+.content .head{
+    color: #666666;
+    font-weight: 600;
+    text-align:center;
+}
+.content .quote{
+    background-color: #fafafa;
+    padding: 20px
+}
+.content .isay{
+    color: green;
+    text-align: left ;
+    margin: 10px 0 40px 0;
+}
+.content pre{
+    background-color:black;
+    color:white;
+    padding: 20px
+}

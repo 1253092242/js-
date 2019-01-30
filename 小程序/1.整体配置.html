@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>小程序整体</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" href="public.css">
+    <script src="main.js"></script>
+</head>
+<body class='content'>
+    <h1>首先小程序根目录有几个配置文件</h1>
+    <ul>
+        <li>app.js</li>
+        <li>app.json</li>
+        <li>app.wxss</li>
+        <li>project.config.json</li>
+    </ul>
+    <h3>1    app.js</h3>
+    <pre>
+        //app.js
+        App({
+          onLaunch: function () {
+            // 展示本地存储能力
+            var logs = wx.getStorageSync('logs') || []
+            logs.unshift(Date.now())
+            wx.setStorageSync('logs', logs)
+        
+            // 登录
+            wx.login({
+              success: res => {
+                // 发送 res.code 到后台换取 openId, sessionKey, unionId
+              }
+            })
+            // 获取用户信息
+            wx.getSetting({
+              success: res => {
+                if (res.authSetting['scope.userInfo']) {
+                  // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+                  wx.getUserInfo({
+                    success: res => {
+                      // 可以将 res 发送给后台解码出 unionId
+                      this.globalData.userInfo = res.userInfo
+        
+                      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+                      // 所以此处加入 callback 以防止这种情况
+                      if (this.userInfoReadyCallback) {
+                        this.userInfoReadyCallback(res)
+                      }
+                    }
+                  })
+                }
+              }
+            })
+          },
+          globalData: {
+            userInfo: null
+          }
+        })
+    </pre>
+    <p class='isay'>总的来说就是一个APP对象，对象中是一些全局属性或者方法。改小程序中所有页面都可以用getApp()来获取该对象。</p>
+
+
+    <h3>2 app.json</h3>
+    <pre>
+
+{
+  "pages":[
+    "pages/index/index",
+    "pages/policy/policy",
+    "pages/server/server",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "寝室好兄弟",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "borderStyle": "black",
+    "selectedColor": "blue",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "img/home.png",
+      "selectedIconPath": "img/home.png"
+    },
+    {
+      "pagePath": "pages/policy/policy",
+      "text": "政策",
+      "iconPath": "img/project.png",
+      "selectedIconPath": "img/project.png"
+    },
+    {
+      "pagePath": "pages/server/server",
+      "text": "服务",
+      "iconPath": "img/server.png",
+      "selectedIconPath": "img/server.png"
+    }]
+  }
+}
+</pre>
+<p class='isay'>
+    理解上是一个小程序的全局配置，官方性质的。因为小程序有很多东西格式都是定死的，比如头部和下方链接   只能改改样子，那就得在这里设置，还有小程序的路由pages
+</p>
+
+<h3 class=''>arr.wxss和project.config.json</h3>
+<p class='isay'>
+    理解上是一个小程序的全局配置，官方性质的。因为小程序有很多东西格式都是定死的，比如头部和下方链接   只能改改样子，那就得在这里设置，还有小程序的路由pages
+</p>
+</body>
+</html>
