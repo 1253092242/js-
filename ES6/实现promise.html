@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <style type="text/css">
+
+  </style>
+  <title>promise实现</title>
+</head>
+<body>
+    <script src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+       let myPromise=function(fn){
+           this.state='panding',
+           this.resolve=function(){
+                this.state='resolve',
+                console.log('ok')
+                this.then()
+            }
+           this.reject=function(){
+                        this.state='reject',
+                        console.log('Nok')
+            }
+           fn(resolve,reject);
+       }
+      function resolve(){
+        console.log(1)
+      }
+       myPromise.prototype.then=function(fn){
+            console.log('then触发')
+       }
+       function test(resolve,reject){
+            setTimeout(
+                ()=>{
+                    if(Math.random()*2>1){
+                        resolve('ok')
+                    }else{
+                        reject('Nok')
+                    }
+                }
+                ,1000)
+       }
+       let p=new myPromise(test)
+    </script>
+</body>
+<html>

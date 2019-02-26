@@ -50,7 +50,7 @@ body{text-align:center;background-color:#000;}
 			context.beginPath(); //路径开始
 			context.fillStyle = getColor(l);
 			context.font="Bold 20px Arial";
-			context.fillText(`${l+2014}`, -22, -(l*150+75+3));
+			context.fillText(`${l+2014}`, -22, -(l*150+75+3));	
 			context.stroke();
         	context.restore();
 		}
@@ -146,10 +146,10 @@ arr.forEach((item,index)=>{
 	if(index==0){
 		item['rank']=index+1
 	}else{
-		if(index>0&&item.code<arr[index-1].code){
+		if(item.code<arr[index-1].code){
 			item['rank']=index+1
 		}else{
-			item['rank']=index
+			item['rank']=arr[index-1].rank
 		}
 	}
 	
