@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>德胜管廊</title>
+    <link  rel="stylesheet" href="guanlang.css">
+</head>
+
+<body>
+    <div id='box'>
+        <nav>
+            
+        </nav>    
+        <div id='left' class='boderL'>
+            <article>
+                
+            </article>
+        </div>
+        <div id='map' class='boderL'>
+
+        </div>
+        <div id='right' class='boderL'>
+
+        </div>
+        <div id='bottom1' class='boderL'>
+
+        </div>
+        <div id='bottom2' class='boderL'>
+
+        </div>
+        <div id='bottom3' class='boderL'>
+
+        </div>
+        <div id='bottom4' class='boderL'>
+            
+        </div>
+    </div>
+</body>
+<script crossorigin="anonymous" integrity="sha384-6oWxS65taI2Yln3n73kPOiHo2npG4nXvlZ9m5vb4neoz8NdRexNOBSfMdv2TVFW0" src="https://lib.baomitu.com/vue/2.6.9/vue.js"></script>
+<script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.common.js"></script>
+<script>
+   new Vue({
+       el:'#box',
+       data:{
+
+       },
+       methods: {
+           
+       },
+       mounted () {
+           // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('bottom1'));
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: '保养业务信息',//图表标题
+                },
+                tooltip: {},
+                legend: {
+                    data:['销量']
+                },
+                xAxis: {
+                    data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+                },
+                yAxis: {},
+                series: [{
+                    name: '销量',
+                    type: 'bar',
+                    data: [5, 20, 36, 10, 10, 20]
+                }]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+
+       }
+   })
+
+
+
+var a=1;
+function a(a){
+    return a=2;
+}
+a(a)
+</script>
+</html>

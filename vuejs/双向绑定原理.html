@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VUE双向绑定的原理</title>
+
+    <div id='myVue'>
+            <input type="text" name="" id="">
+    </div>
+</head>
+<body>
+    
+</body>
+    <script>
+        //js原生的有一个构造器属性
+        function myVue(el,data,methods){
+            _self=this;
+            this.data={};
+            data.forEach(element => {
+                Object.defineproperty(_self.data,element,{
+                    set:function(){
+
+                    },
+                    get:function(){
+
+                    }
+                })
+            });
+        }
+
+
+        var x=1;
+        function test(resolve, reject){
+            setTimeout(()=>{
+                x++;
+                resolve(x);
+            },100),
+            console.log(x)
+            this.getX=function (x){
+                console.log(x)
+            }
+            console.log(x)
+        }
+        function getPromise(fn){
+            return new Promise(test)
+        }
+        getPromise(test).then((x)=>{
+            console.log(x)
+        })
+    </script>
+</html>

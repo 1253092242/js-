@@ -9,7 +9,7 @@
         <ul><li v-for="(x,y) in todos"><button @click="fn1(y)">{{x}}</button></li></ul>
     </div>
     <div id="app2">
-        <input type="text" v-model="inputval" @keyup.13="fn2($event)">
+        <input type="text" v-model="inputval" @keyup.13="fn2()">
         <p>{{inputval}}</p>
         <ul><li v-for="todo in arr">{{todo}}</li></ul>
     </div>
@@ -35,7 +35,8 @@
             arr:[]
         },
         methods:{
-            fn2(e){
+            fn2(event){
+                console.log(this)
                     this.arr.push(this.inputval)
                     this.inputval=''
             },

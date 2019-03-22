@@ -13,7 +13,12 @@
         <p :class="{a:isflag,b:isflag}">一个测试</p>
         <p :class="['a','b']">二个测试</p>
         <p :style="[{color:'pink'},{}]">三个测试</p>
+        
+        <ul>
+            <li v-for='(item,index) in A' onclick='aa(this)' :v=index>{{item}}{{index}}</li>
+        </ul>
     </div>
+
 </body>
 <script src="node_modules/vue/dist/vue.js"></script>
 <script type="text/javascript">
@@ -21,9 +26,18 @@
         el:"#app1",
         data:{
             isflag:"true",
+            A:[1,2,3]
+        },
+        methods: {
+            aa(index){
+                console.log(index)
+            }
         }
     })
 
+function aa(index){
+    console.log(index)
+}
     // 总结：vue添加属性以对象形式添加，可以是多个属性和值，也可以用数组形式添加多个属性
 </script>
 </html>

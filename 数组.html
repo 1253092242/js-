@@ -65,5 +65,11 @@
 	arr.reduceRight(.....);从后往前执行函数,其他一样;
 
 
+var a='北京一夜';
+function fn(a){
+	this[a]='《'+a+'》';
+	return this[a];
+}
+console.log(fn.call(window,a))
 	</script>
 </html>

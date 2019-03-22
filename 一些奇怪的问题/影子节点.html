@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>shadow-dom</title>
+</head>
+<body>
+    <div id="div1"></div>
+    <div id="div2"></div>
+</body>
+<script>
+    window.onload = function() {
+        var div1 = document.getElementById('div1');
+        var div2 = document.getElementById('div2');
+
+        // 使用 createShadowRoot 创建影子根节点
+        var root = div1.createShadowRoot();
+
+        root.innerHTML = '<div>This is a div from shadow dom1!</div>';
+
+        // 使用 attachShadow 在宿主元素下附加一个影子节点
+        // mode设为closed， 会让影子节点变为只读  
+        var shadow = div2.attachShadow({mode: 'open'})
+
+        shadow.innerHTML = '<div>This is a div from shadow dom2!</div>';
+
+        // 影子根节点
+        console.log(div1.shadowRoot);
+        // 影子节点的宿主元素
+        console.log(div1.shadowRoot.host);
+    }
+</script>
+</html>
